@@ -18,7 +18,7 @@ from keras.utils import multi_gpu_model
 
 class YOLO(object):
     def __init__(self):
-        self.model_path = 'model_data/yolo4.h5'
+        self.model_path = '/content/drive/My Drive/AIChallengeHCM/yolo4.h5'
         self.anchors_path = 'model_data/yolo_anchors.txt'
         self.classes_path = 'model_data/coco_classes.txt'
         self.gpu_num = 1
