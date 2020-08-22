@@ -19,9 +19,15 @@ from tools import generate_detections as gdet
 import imutils.video
 from videocaptureasync import VideoCaptureAsync
 
+import argparse
+
 warnings.filterwarnings('ignore')
 
 def main(yolo):
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('input', type=str, help='Input video path')
+    parser.add_argument('output', type=str, help='Ouput video path')
+    args = argparser.parse_args()
 
     # Definition of the parameters
     max_cosine_distance = 0.3
@@ -39,7 +45,7 @@ def main(yolo):
     writeVideo_flag = True
     asyncVideo_flag = False
 
-    file_path = 'video.webm'
+    file_path = args.input
     if asyncVideo_flag :
         video_capture = VideoCaptureAsync(file_path)
     else:
@@ -56,7 +62,7 @@ def main(yolo):
             w = int(video_capture.get(3))
             h = int(video_capture.get(4))
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
-        out = cv2.VideoWriter('output_yolov4.avi', fourcc, 30, (w, h))
+        out = cv2.VideoWriter(args.output, fourcc, 30, (w, h))
         frame_index = -1
 
     fps = 0.0
@@ -109,7 +115,7 @@ def main(yolo):
                 cv2.putText(frame, str(cls) + " " + score, (int(bbox[0]), int(bbox[3])), 0,
                             1.5e-3 * frame.shape[0], (0, 255, 0), 1)
 
-        cv2.imshow('', frame)
+        # cv2.imshow('', frame)
 
         if writeVideo_flag: # and not asyncVideo_flag:
             # save a frame
@@ -123,8 +129,8 @@ def main(yolo):
             print("FPS = %f"%(fps))
         
         # Press Q to stop!
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+        # if cv2.waitKey(1) & 0xFF == ord('q'):
+        #     break
 
     fps_imutils.stop()
     print('imutils FPS: {}'.format(fps_imutils.fps()))
