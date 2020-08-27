@@ -29,7 +29,7 @@ def main():
     parser.add_argument('input', type=str, help='Input video path')
     parser.add_argument('bbox', type=str, help='Input bounding box path')
     parser.add_argument('output', type=str, help='Ouput video path')
-    args = argparser.parse_args()
+    args = parser.parse_args()
 
     # Definition of the parameters
     max_cosine_distance = 0.3
