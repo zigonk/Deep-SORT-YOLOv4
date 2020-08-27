@@ -24,7 +24,7 @@ import argparse
 
 warnings.filterwarnings('ignore')
 
-def main(yolo):
+def main():
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('input', type=str, help='Input video path')
     parser.add_argument('bbox', type=str, help='Input bounding box path')
