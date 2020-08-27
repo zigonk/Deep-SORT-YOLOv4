@@ -80,9 +80,9 @@ def main():
         t1 = time.time()
 
         image = Image.fromarray(frame[...,::-1])  # bgr to rgb
-        boxes = np.asarray([pred.bbox for pred in data[frame_index]['annotations']])
-        confidence = np.asarray([pred.score for pred in data[frame_index]['annotations']])
-        classes = np.asarray([pred.box for pred in data[frame_index]['annotations']])
+        boxes = np.asarray([pred['bbox'] for pred in data[frame_index]['annotations']])
+        confidence = np.asarray([pred['score'] for pred in data[frame_index]['annotations']])
+        classes = np.asarray([pred['label'] for pred in data[frame_index]['annotations']])
 
         if tracking:
             features = encoder(frame, boxes)
